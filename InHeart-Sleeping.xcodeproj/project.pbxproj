@@ -14,6 +14,7 @@
 		3D48F50B207A0D2100A961CF /* XJSRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D48F50A207A0D2100A961CF /* XJSRecordModel.m */; };
 		3D48F50D207DA00E00A961CF /* Addition.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D48F50C207DA00E00A961CF /* Addition.storyboard */; };
 		3D48F511207DA26400A961CF /* XJSAboutSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D48F510207DA26400A961CF /* XJSAboutSystemViewController.m */; };
+		3D76AB4D21903D8500D47C66 /* UIView+XPYRoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D76AB4C21903D8500D47C66 /* UIView+XPYRoundedCorner.m */; };
 		3D8A7F18206E2C5500271B93 /* XJSPatientDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D8A7F17206E2C5500271B93 /* XJSPatientDetailViewController.m */; };
 		3D9446A2205FB3F80056A492 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D9446A1205FB3F80056A492 /* AppDelegate.m */; };
 		3D9446AA205FB3F80056A492 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D9446A9205FB3F80056A492 /* Assets.xcassets */; };
@@ -84,6 +85,8 @@
 		3D48F50C207DA00E00A961CF /* Addition.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Addition.storyboard; sourceTree = "<group>"; };
 		3D48F50F207DA26400A961CF /* XJSAboutSystemViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSAboutSystemViewController.h; sourceTree = "<group>"; };
 		3D48F510207DA26400A961CF /* XJSAboutSystemViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSAboutSystemViewController.m; sourceTree = "<group>"; };
+		3D76AB4B21903D8500D47C66 /* UIView+XPYRoundedCorner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+XPYRoundedCorner.h"; sourceTree = "<group>"; };
+		3D76AB4C21903D8500D47C66 /* UIView+XPYRoundedCorner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+XPYRoundedCorner.m"; sourceTree = "<group>"; };
 		3D8A7F16206E2C5500271B93 /* XJSPatientDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XJSPatientDetailViewController.h; sourceTree = "<group>"; };
 		3D8A7F17206E2C5500271B93 /* XJSPatientDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XJSPatientDetailViewController.m; sourceTree = "<group>"; };
 		3D94469D205FB3F80056A492 /* InHeart-Sleeping.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "InHeart-Sleeping.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +204,15 @@
 			path = Addition;
 			sourceTree = "<group>";
 		};
+		3D76AB4A21903D2D00D47C66 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				3D76AB4B21903D8500D47C66 /* UIView+XPYRoundedCorner.h */,
+				3D76AB4C21903D8500D47C66 /* UIView+XPYRoundedCorner.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		3D944694205FB3F80056A492 = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +328,7 @@
 		3D9446EB205FB9990056A492 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				3D76AB4A21903D2D00D47C66 /* Category */,
 				3D944706206245220056A492 /* XJSUtilities.h */,
 				3D944708206245230056A492 /* XJSUtilities.m */,
 				3D944707206245230056A492 /* XJSUtilitiesDefines.h */,
@@ -671,6 +684,7 @@
 				3DB1E0FA2072216E003270E6 /* XJSChooseDevicesView.m in Sources */,
 				3D9446F32060B2710056A492 /* XJSLoginViewController.m in Sources */,
 				3D94473A2068CF850056A492 /* XJSTherapyModel.m in Sources */,
+				3D76AB4D21903D8500D47C66 /* UIView+XPYRoundedCorner.m in Sources */,
 				3D48F511207DA26400A961CF /* XJSAboutSystemViewController.m in Sources */,
 				3D9447252064EE910056A492 /* XJSBaseRequest.m in Sources */,
 				3D944709206245230056A492 /* XJSUtilities.m in Sources */,
@@ -884,7 +898,7 @@
 			baseConfigurationReference = D429C4CF6C11B9090CC7EA47 /* Pods-InHeart-Sleeping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = NU4X48R8LQ;
@@ -893,10 +907,10 @@
 				INFOPLIST_FILE = "InHeart-Sleeping/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.medvision.vrmed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medvision.relax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "992c1f4e-b789-4665-b6a5-811dd5406e1e";
-				PROVISIONING_PROFILE_SPECIFIER = VRMedDevelopment;
+				PROVISIONING_PROFILE_SPECIFIER = VRRelaxDevelopment;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -909,16 +923,16 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = NU4X48R8LQ;
+				DEVELOPMENT_TEAM = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/InHeart-Sleeping/InHeart-Sleeping-Prefix.pch";
 				INFOPLIST_FILE = "InHeart-Sleeping/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.medvision.vrmed;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medvision.relax;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "46e1d562-d8ac-4407-bda6-40a8a8fab561";
-				PROVISIONING_PROFILE_SPECIFIER = VRMedDistribution;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

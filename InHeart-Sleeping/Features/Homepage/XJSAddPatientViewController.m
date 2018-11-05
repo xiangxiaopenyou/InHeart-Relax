@@ -10,9 +10,8 @@
 #import "XJSPatientCommonInfomationCell.h"
 
 
-@interface XJSAddPatientViewController () <UITableViewDelegate, UITableViewDataSource, XJSPatientCommonInfomationCellDelegate, UITextFieldDelegate>
+@interface XJSAddPatientViewController () <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *leftTableView;
-@property (weak, nonatomic) IBOutlet UITableView *rightTableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *rightItem;
 
 @end
@@ -23,7 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     if (self.isModifyInformations) {
-        self.title = @"修改患者信息";
+        self.title = @"修改用户信息";
         self.rightItem.title = @"修改";
     }
     if (!self.patientModel.maritalStatus) {
@@ -114,7 +113,7 @@
                 XJSShowHud(NO, msg);
             }
         }];
-    } else {                           //添加患者
+    } else {                           //添加用户
         [XJSPatientModel addPatient:params handler:^(id object, NSString *msg) {
             [MBProgressHUD hideHUDForView:XJSKeyWindow animated:YES];
             if (object) {
@@ -167,12 +166,6 @@
             break;
     }
 }
-#pragma mark - Patient common infomation cell delegate
-- (void)dateDidChange:(NSString *)dateString {
-    self.patientModel.enterTime = dateString;
-    UITextField *dateTextField = (UITextField *)[self.rightTableView viewWithTag:24];
-    dateTextField.text = dateString;
-}
 
 #pragma mark - Text field delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -203,199 +196,36 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XJSPatientCommonInfomationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XJSPatientCommonInfomationCell" forIndexPath:indexPath];
-    if (tableView == self.leftTableView) {
-        [cell setupContentView:1 index:indexPath.row];
-        [cell addContentData:self.patientModel tableType:1 index:indexPath.row];
-        cell.textField.tag = 10 + indexPath.row;
-    } else {
-        [cell setupContentView:2 index:indexPath.row];
-        [cell addContentData:self.patientModel tableType:2 index:indexPath.row];
-        cell.textField.tag = 20 + indexPath.row;
-    }
+    [cell setupContentView:indexPath.row];
+    [cell addContentData:self.patientModel index:indexPath.row];
+    cell.textField.tag = 10 + indexPath.row;
     [cell.textField addTarget:self action:@selector(infoTextFieldEditingChanged:) forControlEvents:UIControlEventEditingChanged];
     cell.textField.delegate = self;
-    cell.delegate = self;
     return cell;
 }
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     XJSPatientCommonInfomationCell *cell = (XJSPatientCommonInfomationCell *)[tableView cellForRowAtIndexPath:indexPath];
-    if (tableView == self.leftTableView) {
-        if (indexPath.row == 2) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择性别" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            UIAlertAction *maleAction = [UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.patientModel.gender = @(XJSUserGenderMale);
-                cell.textField.text = @"男";
-            }];
-            UIAlertAction *femaleAction = [UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.patientModel.gender = @(XJSUserGenderFemale);
-                cell.textField.text = @"女";
-            }];
-            [alert addAction:maleAction];
-            [alert addAction:femaleAction];
-            UIPopoverPresentationController *popover = alert.popoverPresentationController;
-            if (popover) {
-                popover.sourceView = cell.contentView;
-                popover.sourceRect = cell.contentView.bounds;
-                popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
-            }
-            [self presentViewController:alert animated:YES completion:nil];
+    if (indexPath.row == 2) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择性别" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction *maleAction = [UIAlertAction actionWithTitle:@"男" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.patientModel.gender = @(XJSUserGenderMale);
+            cell.textField.text = @"男";
+        }];
+        UIAlertAction *femaleAction = [UIAlertAction actionWithTitle:@"女" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            self.patientModel.gender = @(XJSUserGenderFemale);
+            cell.textField.text = @"女";
+        }];
+        [alert addAction:maleAction];
+        [alert addAction:femaleAction];
+        UIPopoverPresentationController *popover = alert.popoverPresentationController;
+        if (popover) {
+            popover.sourceView = cell.contentView;
+            popover.sourceRect = cell.contentView.bounds;
+            popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
         }
-    } else {
-        if (indexPath.row == 1) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择婚姻状况" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:@"保密" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                self.patientModel.maritalStatus = @(XJSMaritalStatusNone);
-                cell.textField.text = @"保密";
-            }];
-            UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"未婚" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.patientModel.maritalStatus = @(XJSMaritalStatusNot);
-                cell.textField.text = @"未婚";
-            }];
-            UIAlertAction *action2 = [UIAlertAction actionWithTitle:@"已婚" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                self.patientModel.maritalStatus = @(XJSMaritalStatusMarried);
-                cell.textField.text = @"已婚";
-            }];
-            [alert addAction:destructiveAction];
-            [alert addAction:action1];
-            [alert addAction:action2];
-            UIPopoverPresentationController *popover = alert.popoverPresentationController;
-            if (popover) {
-                popover.sourceView = cell.contentView;
-                popover.sourceRect = cell.contentView.bounds;
-                popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
-            }
-            [self presentViewController:alert animated:YES completion:nil];
-        } else if (indexPath.row == 2) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选择文化程度" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            NSString *actionTitle = nil;
-            for (NSInteger i = 0; i < 11; i ++) {
-                switch (i) {
-                    case 0: {
-                        actionTitle = @"保密";
-                    }
-                        break;
-                    case 1: {
-                        actionTitle = @"博士";
-                    }
-                        break;
-                    case 2: {
-                        actionTitle = @"硕士";
-                    }
-                        break;
-                    case 3: {
-                        actionTitle = @"本科";
-                    }
-                        break;
-                    case 4: {
-                        actionTitle = @"大专";
-                    }
-                        break;
-                    case 5: {
-                        actionTitle = @"中专和中技";
-                    }
-                        break;
-                    case 6: {
-                        actionTitle = @"技工学校";
-                    }
-                        break;
-                    case 7: {
-                        actionTitle = @"高中";
-                    }
-                        break;
-                    case 8: {
-                        actionTitle = @"初中";
-                    }
-                        break;
-                    case 9: {
-                        actionTitle = @"小学";
-                    }
-                        break;
-                    case 10: {
-                        actionTitle = @"文盲与半文盲";
-                    }
-                        break;
-                        
-                    default:
-                        break;
-                }
-                if (i == 0) {
-                    UIAlertAction *destructiveAction = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                        self.patientModel.educationDegree = @(XJSEducationDegreeNone);
-                        cell.textField.text = @"保密";
-                    }];
-                    [alert addAction:destructiveAction];
-                } else {
-                    UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        switch (i) {
-                            case 1: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeFirst);
-                                cell.textField.text = @"博士";
-                            }
-                                break;
-                            case 2: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeSecond);
-                                cell.textField.text = @"硕士";
-                            }
-                                break;
-                            case 3: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeThird);
-                                cell.textField.text = @"本科";
-                            }
-                                break;
-                            case 4: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeForth);
-                                cell.textField.text = @"大专";
-                            }
-                                break;
-                            case 5: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeFifth);
-                                cell.textField.text = @"中专和中技";
-                            }
-                                break;
-                            case 6: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeSixth);
-                                cell.textField.text = @"技工学校";
-                            }
-                                break;
-                            case 7: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeSeventh);
-                                cell.textField.text = @"高中";
-                            }
-                                break;
-                            case 8: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeEighth);
-                                cell.textField.text = @"初中";
-                            }
-                                break;
-                            case 9: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeNinth);
-                                cell.textField.text = @"小学";
-                            }
-                                break;
-                            case 10: {
-                                self.patientModel.educationDegree = @(XJSEducationDegreeTenth);
-                                cell.textField.text = @"文盲与半文盲";
-                            }
-                                break;
-                                
-                            default:
-                                break;
-                        }
-                    }];
-                    [alert addAction:action];
-                }
-                
-            }
-            UIPopoverPresentationController *popover = alert.popoverPresentationController;
-            if (popover) {
-                popover.sourceView = cell.contentView;
-                popover.sourceRect = cell.contentView.bounds;
-                popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
-            }
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
