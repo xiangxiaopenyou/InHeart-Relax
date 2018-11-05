@@ -1,0 +1,19 @@
+//
+//  InHeart-Sleeping-Prefix.pch
+//  InHeart-Sleeping
+//
+//  Created by 项小盆友 on 2018/3/21.
+//  Copyright © 2018年 项小盆友. All rights reserved.
+//
+
+#ifndef InHeart_Sleeping_Prefix_pch
+#define InHeart_Sleeping_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import "XJSCommonsDefines.h"
+#import "XJSUtilitiesDefines.h"
+#import "XJSUserManager.h"
+#import <MBProgressHUD.h>
+
+#endif /* InHeart_Sleeping_Prefix_pch */

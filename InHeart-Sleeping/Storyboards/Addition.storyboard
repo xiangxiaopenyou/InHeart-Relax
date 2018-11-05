@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="oSe-hq-3ZC">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--关于系统-->
+        <scene sceneID="xCL-gG-RoE">
+            <objects>
+                <viewController storyboardIdentifier="XJSAboutSystem" id="oSe-hq-3ZC" customClass="XJSAboutSystemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6Qx-vm-byV"/>
+                        <viewControllerLayoutGuide type="bottom" id="6X6-Eo-WSb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mhO-3C-dZg">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZUH-9Y-Ure">
+                                <rect key="frame" x="367" y="270" width="290" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q26-hU-IER">
+                                        <rect key="frame" x="0.0" y="0.0" width="277.5" height="19.5"/>
+                                        <string key="text">软件名称：虚拟现实心理健康训练系统 
+</string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="软件版本：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5L-XP-Exc">
+                                        <rect key="frame" x="0.0" y="29.5" width="82" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="软件厂商：杭州心景科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xTK-1n-1rl">
+                                        <rect key="frame" x="0.0" y="59" width="245" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务热线：400-166-7866" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpW-Jz-sjl">
+                                        <rect key="frame" x="0.0" y="88.5" width="191" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="r5L-XP-Exc" firstAttribute="leading" secondItem="ZUH-9Y-Ure" secondAttribute="leading" id="DVq-PR-3Qa"/>
+                                    <constraint firstItem="Q26-hU-IER" firstAttribute="leading" secondItem="ZUH-9Y-Ure" secondAttribute="leading" id="Fvu-9l-mrC"/>
+                                    <constraint firstItem="xTK-1n-1rl" firstAttribute="top" secondItem="r5L-XP-Exc" secondAttribute="bottom" constant="10" id="WFS-Q9-RNb"/>
+                                    <constraint firstItem="Q26-hU-IER" firstAttribute="top" secondItem="ZUH-9Y-Ure" secondAttribute="top" id="WUj-3Q-c5E"/>
+                                    <constraint firstItem="r5L-XP-Exc" firstAttribute="top" secondItem="Q26-hU-IER" secondAttribute="bottom" constant="10" id="bmV-70-86X"/>
+                                    <constraint firstAttribute="height" constant="128" id="fbZ-ed-pzq"/>
+                                    <constraint firstItem="xTK-1n-1rl" firstAttribute="leading" secondItem="ZUH-9Y-Ure" secondAttribute="leading" id="fuT-pL-fIm"/>
+                                    <constraint firstItem="KpW-Jz-sjl" firstAttribute="top" secondItem="xTK-1n-1rl" secondAttribute="bottom" constant="10" id="tEQ-6f-6lI"/>
+                                    <constraint firstItem="KpW-Jz-sjl" firstAttribute="leading" secondItem="ZUH-9Y-Ure" secondAttribute="leading" id="uK5-LZ-abI"/>
+                                    <constraint firstAttribute="width" constant="290" id="yQN-2D-0Jf"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ZUH-9Y-Ure" firstAttribute="centerY" secondItem="mhO-3C-dZg" secondAttribute="centerY" constant="-50" id="8Uq-Hl-kHn"/>
+                            <constraint firstItem="ZUH-9Y-Ure" firstAttribute="centerX" secondItem="mhO-3C-dZg" secondAttribute="centerX" id="YKZ-Xh-yKJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="关于系统" id="D9U-FG-kdZ"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="appVersionLabel" destination="r5L-XP-Exc" id="r8O-WC-NIa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w7w-5Y-uSa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369" y="98"/>
+        </scene>
+    </scenes>
+</document>
