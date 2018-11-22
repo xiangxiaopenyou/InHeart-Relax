@@ -101,7 +101,7 @@
                 self.paging += 1;
             }
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.emptyLabel.text = self.patientsArray.count > 0 ? nil : @"暂无患者";
+                self.emptyLabel.text = self.patientsArray.count > 0 ? nil : @"暂无用户";
                 [self.collectionView reloadData];
             });
         } else {
@@ -119,7 +119,7 @@
             [self.patientsArray removeObjectAtIndex:idx];
             //[self.collectionView deleteItemsAtIndexPaths:@[[NSIndexPath indexPathForRow:idx inSection:0]]];
             if (self.patientsArray.count == 0) {
-                self.emptyLabel.text = @"暂无患者";
+                self.emptyLabel.text = @"暂无用户";
             }
             [self.collectionView reloadData];
         }
@@ -174,7 +174,6 @@
     cell.avatarImageView.image = patientModel.gender.integerValue == 1 ? [UIImage imageNamed:@"head_boy"] : [UIImage imageNamed:@"head_girl"];
     cell.patientNumberLabel.text = patientModel.patientNumber;
     cell.ageLabel.text = [NSString stringWithFormat:@"%@岁", patientModel.age];
-    cell.diseaseLabel.text = patientModel.symptoms;
     return cell;
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {

@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface XJSTrainingRecordCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *hospitalLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *doctorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sceneLabel;
 
 @end

@@ -25,19 +25,6 @@
         self.title = @"修改用户信息";
         self.rightItem.title = @"修改";
     }
-    if (!self.patientModel.maritalStatus) {
-        self.patientModel.maritalStatus = @(XJSMaritalStatusNone);
-    }
-    if (!self.patientModel.educationDegree) {
-        self.patientModel.educationDegree = @(XJSEducationDegreeNone);
-    }
-    if (!self.patientModel.enterTime) {
-        NSDate *currentDate = [NSDate date];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSString *dateString = [dateFormatter stringFromDate:currentDate];
-        self.patientModel.enterTime = dateString;
-    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,7 +36,7 @@
 - (IBAction)addAction:(id)sender {
     [self.view endEditing:YES];
     if (XJSIsNullObject(self.patientModel.patientNumber)) {
-        XJSShowHud(NO, @"请输入病案号");
+        XJSShowHud(NO, @"请输入编号");
         return;
     }
     if (XJSIsNullObject(self.patientModel.realname)) {
@@ -64,29 +51,11 @@
         XJSShowHud(NO, @"请输入年龄");
         return;
     }
-    if (XJSIsNullObject(self.patientModel.symptoms)) {
-        XJSShowHud(NO, @"请输入症状");
-        return;
-    }
-    NSString *timeString = self.patientModel.enterTime;
-    if (timeString.length == 10) {
-        timeString = [timeString stringByAppendingString:@" 00:00:00"];
-    }
     NSMutableDictionary *params = [@{@"patientNumber" : self.patientModel.patientNumber,
                                      @"realname": self.patientModel.realname,
                                      @"gender" : self.patientModel.gender,
                                      @"age" : self.patientModel.age,
-                                     @"symptoms" : self.patientModel.symptoms,
-                                     @"maritalStatus" : self.patientModel.maritalStatus,
-                                     @"educationDegree" : self.patientModel.educationDegree,
-                                     @"enterTime" : timeString
                                      } mutableCopy];
-    if (!XJSIsNullObject(self.patientModel.medicareNumber)) {
-        [params setObject:self.patientModel.medicareNumber forKey:@"medicareNumber"];
-    }
-    if (!XJSIsNullObject(self.patientModel.identificationNumber)) {
-        [params setObject:self.patientModel.identificationNumber forKey:@"identificationNumber"];
-    }
     if (!XJSIsNullObject(self.patientModel.phoneNumber)) {
         if (!XJSIsMobileNumber(self.patientModel.phoneNumber)) {
             XJSShowHud(NO, @"请输入正确的手机号");
@@ -94,11 +63,11 @@
         }
         [params setObject:self.patientModel.phoneNumber forKey:@"phoneNumber"];
     }
-    if (!XJSIsNullObject(self.patientModel.address)) {
-        [params setObject:self.patientModel.address forKey:@"address"];
+    if (!XJSIsNullObject(self.patientModel.remarks)) {
+        [params setObject:self.patientModel.remarks forKey:@"remarks"];
     }
     [MBProgressHUD showHUDAddedTo:XJSKeyWindow animated:YES];
-    if (self.isModifyInformations) {    //修改患者信息
+    if (self.isModifyInformations) {    //修改用户信息
         [params setObject:self.patientModel.id forKey:@"id"];
         [params setObject:self.patientModel.ts forKey:@"ts"];
         [XJSPatientModel modifyPatientInformations:params handler:^(id object, NSString *msg) {
@@ -143,23 +112,11 @@
         }
             break;
         case 14: {
-            self.patientModel.medicareNumber = textField.text;
-        }
-            break;
-        case 15: {
-            self.patientModel.identificationNumber = textField.text;
-        }
-            break;
-        case 20: {
-            self.patientModel.symptoms = textField.text;
-        }
-            break;
-        case 23: {
             self.patientModel.phoneNumber = textField.text;
         }
             break;
-        case 25: {
-            self.patientModel.address = textField.text;
+        case 15: {
+            self.patientModel.remarks = textField.text;
         }
             break;
         default:
@@ -172,7 +129,7 @@
     if ([string isEqualToString:@" "]) {
         return NO;
     }
-    if (textField.tag == 13) {
+    if (textField.tag == 13 || textField.tag == 14) {
         NSString *numbers = @"0123456789";
         NSCharacterSet *set = [[NSCharacterSet characterSetWithCharactersInString:numbers] invertedSet];
         NSString *filtered = [[string componentsSeparatedByCharactersInSet:set] componentsJoinedByString:@""];

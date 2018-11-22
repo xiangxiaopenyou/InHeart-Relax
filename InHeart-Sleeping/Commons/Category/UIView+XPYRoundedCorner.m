@@ -19,7 +19,9 @@
         shaperLayer.strokeColor = color.CGColor;
         shaperLayer.fillColor = [UIColor clearColor].CGColor;
         shaperLayer.lineWidth = width;
+        //圆角
         shaperLayer.lineJoin = kCALineJoinRound;
+        //圆形端点
         shaperLayer.lineCap = kCALineCapRound;
         shaperLayer.path = path.CGPath;
         [self.layer addSublayer:shaperLayer];

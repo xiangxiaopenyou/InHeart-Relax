@@ -10,7 +10,7 @@
 
 @implementation XJSPatientModel
 + (void)addPatient:(NSDictionary *)params handler:(RequestResultHandler)handler {
-    [[XJSBaseRequest new] postRequest:params requestURLString:@"addPatient" result:^(id object, NSString *msg) {
+    [[XJSBaseRequest new] postRequest:params requestURLString:@"addUser" result:^(id object, NSString *msg) {
         if (object) {
             !handler ?: handler(object, nil);
         } else {
@@ -23,7 +23,7 @@
     if (keyword) {
         [params setObject:keyword forKey:@"keyword"];
     }
-    [[XJSBaseRequest new] postRequest:params requestURLString:@"patientsList" result:^(id object, NSString *msg) {
+    [[XJSBaseRequest new] postRequest:params requestURLString:@"userList" result:^(id object, NSString *msg) {
         if (object) {
             NSArray *tempArray = [XJSPatientModel modelArrayFromArray:(NSArray *)object];
             !handler ?: handler(tempArray, nil);
@@ -34,7 +34,7 @@
 }
 + (void)patientDetail:(NSString *)patientId handler:(RequestResultHandler)handler {
     NSDictionary *params = @{@"id" : patientId};
-    [[XJSBaseRequest new] postRequest:params requestURLString:@"patientInformations" result:^(id object, NSString *msg) {
+    [[XJSBaseRequest new] postRequest:params requestURLString:@"userInformations" result:^(id object, NSString *msg) {
         if (object) {
             XJSPatientModel *tempModel = [XJSPatientModel yy_modelWithDictionary:(NSDictionary *)object];
             !handler ?: handler(tempModel, nil);
@@ -44,7 +44,7 @@
     }];
 }
 + (void)modifyPatientInformations:(NSDictionary *)params handler:(RequestResultHandler)handler {
-    [[XJSBaseRequest new] postRequest:params requestURLString:@"updatePatient" result:^(id object, NSString *msg) {
+    [[XJSBaseRequest new] postRequest:params requestURLString:@"updateUser" result:^(id object, NSString *msg) {
         if (object) {
             !handler ?: handler(object, nil);
         } else {

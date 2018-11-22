@@ -30,15 +30,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
-@property (weak, nonatomic) IBOutlet UILabel *instructionsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *attentionLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *scenesCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *viewOfTherapies;
 
 @property (strong, nonatomic) UITableView *therapyTableView;
 @property (strong, nonatomic) XJSChooseDevicesView *devicesView;
 
-@property (copy, nonatomic) NSArray *therapiesArray;
+@property (strong, nonatomic) NSMutableArray *therapiesArray;
 @property (strong, nonatomic) NSIndexPath *selectedTherapyIndexPath;
 @property (strong, nonatomic) NSMutableArray *scenesArray;
 @property (nonatomic) NSInteger scenePaging;
@@ -99,11 +97,11 @@
     self.avatarImageView.image = self.patientModel.gender.integerValue == 1 ? [UIImage imageNamed:@"head_boy"] : [UIImage imageNamed:@"head_girl"];
     self.ageLabel.text = [NSString stringWithFormat:@"%@岁", self.patientModel.age];
 }
-- (void)setupTherapyInformations {
-    XJSTherapyModel *therapyModel = _therapiesArray[_selectedTherapyIndexPath.row];
-    self.instructionsLabel.text = therapyModel.instructions;
-    self.attentionLabel.text = therapyModel.attention;
-}
+//- (void)setupTherapyInformations {
+//    XJSTherapyModel *therapyModel = _therapiesArray[_selectedTherapyIndexPath.row];
+//    self.instructionsLabel.text = therapyModel.instructions;
+//    self.attentionLabel.text = therapyModel.attention;
+//}
 
 #pragma mark - Action
 - (IBAction)recordAction:(id)sender {
@@ -115,11 +113,22 @@
 - (void)fetchTherapyList {
     [XJSTherapyModel therapiesList:^(id object, NSString *msg) {
         if (object) {
-            self.therapiesArray = [(NSArray *)object copy];
+            self.therapiesArray = [(NSArray *)object mutableCopy];
+            if (self.therapiesArray.count == 5) {
+                [self.therapiesArray removeObjectAtIndex:2];
+                [self.therapiesArray removeObjectAtIndex:3];
+                [self.therapiesArray enumerateObjectsUsingBlock:^(XJSTherapyModel *obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (idx == 0) {
+                        obj.name = @"VR松弛（长）";
+                    } else if (idx == 1) {
+                        obj.name = @"VR松弛（短）";
+                    }
+                }];
+            }
             self.scenePaging = 1;
             [self fetchSceneList];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self setupTherapyInformations];
+                //[self setupTherapyInformations];
                 [self.therapyTableView reloadData];
             });
         } else {
@@ -184,7 +193,7 @@
     return _therapiesArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.f;
+    return 120;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     XJSTherapyTitleCell *cell = [[XJSTherapyTitleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TherapyTitleCell"];
@@ -194,15 +203,16 @@
     cell.transform = CGAffineTransformMakeRotation(- M_PI * 1.5);
     XJSTherapyModel *model = _therapiesArray[indexPath.row];
     cell.nameLabel.text = model.name;
-    cell.nameLabel.frame = CGRectMake(0, 0, 80, 80);
-    cell.pointImageView.frame = CGRectMake(34, 68, 12, 12);
+    cell.nameLabel.frame = CGRectMake(0, 0, 120, 80);
+    cell.pointImageView.frame = CGRectMake(54, 68, 12, 12);
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath != _selectedTherapyIndexPath) {
         _selectedTherapyIndexPath = indexPath;
-        [self setupTherapyInformations];
-        [self fetchSceneList];
+        //[self setupTherapyInformations];
+        [self.scenesCollectionView.mj_header beginRefreshing];
+        //[self fetchSceneList];
     }
 }
 
@@ -215,7 +225,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     XJSSceneCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"XJSSceneCollectionViewCell" forIndexPath:indexPath];
     XJSSceneModel *model = self.scenesArray[indexPath.row];
-    cell.sceneNameLabel.text = model.name;
+    cell.sceneNameLabel.text = model.mtname;
     cell.sceneInstructionsLabel.text = model.introduction;
     [cell.sceneImageView sd_setImageWithURL:[NSURL URLWithString:model.coverPictureUrl]];
     return cell;

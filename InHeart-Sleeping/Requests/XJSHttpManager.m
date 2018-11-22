@@ -8,7 +8,7 @@
 
 #import "XJSHttpManager.h"
 //static NSString * const BASEURL = @"http://test.med-vision.cn/api/v1/appControllerSm/";
-static NSString * const BASEURL = /*@"http://10.12.254.11:8080/api/v1/appControllerSm/";//*/@"http://support.med-vision.cn/api/v1/appControllerSm/";
+static NSString * const BASEURL = /*@"http://10.12.254.11:8081/api/v1/appControllerSm/"; //*/@"http://support.med-vision.cn/api/v1/appControllerSm/";
 
 @implementation XJSHttpManager
 + (instancetype)sharedInstance {

@@ -37,7 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self createViews];
-    self.patientNumberLabel.text = [NSString stringWithFormat:@"病案号：%@", self.patientModel.patientNumber];
+    self.patientNumberLabel.text = [NSString stringWithFormat:@"编号：%@", self.patientModel.patientNumber];
     self.nameLabel.text = [NSString stringWithFormat:@"姓名：%@", self.patientModel.realname];
     
     self.tableView.tableFooterView = [UIView new];
@@ -175,9 +175,7 @@
     XJSTrainingRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"XJSTrainingRecordCell" forIndexPath:indexPath];
     XJSRecordModel *model = self.recordsArray[indexPath.row];
     cell.sceneLabel.text = model.sceneName;
-    cell.hospitalLabel.text = model.hospitalName;
     cell.dateLabel.text = [model.time substringToIndex:19];
-    cell.doctorLabel.text = model.doctorName;
     return cell;
 }
 

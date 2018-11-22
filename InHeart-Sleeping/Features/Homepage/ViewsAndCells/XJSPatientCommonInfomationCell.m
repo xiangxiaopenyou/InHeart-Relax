@@ -77,7 +77,7 @@
         }
             break;
         case 5: {
-            self.textField.text = model.identificationNumber ? model.identificationNumber : nil;
+            self.textField.text = model.remarks ? model.remarks : nil;
         }
             break;
         

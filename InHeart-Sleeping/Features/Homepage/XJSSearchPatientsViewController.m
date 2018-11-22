@@ -126,7 +126,7 @@
     cell.avatarImageView.image = patientModel.gender.integerValue == 1 ? [UIImage imageNamed:@"head_boy"] : [UIImage imageNamed:@"head_girl"];
     cell.patientNumberLabel.text = patientModel.patientNumber;
     cell.ageLabel.text = [NSString stringWithFormat:@"%@岁", patientModel.age];
-    cell.diseaseLabel.text = patientModel.symptoms;
+    //cell.diseaseLabel.text = patientModel.symptoms;
     return cell;
 }
 #pragma mark - Collection view delegate flow layout

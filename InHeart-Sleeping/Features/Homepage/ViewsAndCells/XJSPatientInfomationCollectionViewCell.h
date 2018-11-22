@@ -18,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
-@property (weak, nonatomic) IBOutlet UILabel *diseaseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *patientNumberLabel;
 
 @property (strong, nonatomic) XJSPatientModel *patientModel;

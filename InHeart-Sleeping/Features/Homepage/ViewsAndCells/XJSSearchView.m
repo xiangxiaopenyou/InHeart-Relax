@@ -77,7 +77,7 @@
     if (!_textField) {
         _textField = [[UITextField alloc] initWithFrame:CGRectMake(25, 0, 255, 32)];
         _textField.textColor = XJSHexRGBColorWithAlpha(0x666666, 1);
-        _textField.placeholder = @"病案号/姓名/手机号";
+        _textField.placeholder = @"编号";
         _textField.font = XJSSystemFont(12);
         _textField.returnKeyType = UIReturnKeySearch;
         _textField.enablesReturnKeyAutomatically = YES;
